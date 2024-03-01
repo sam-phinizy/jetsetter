@@ -1,0 +1,11 @@
+<application>
+    <component name="ProjectJdkTable">
+        <jdk version="2">
+            <name value="test"/>
+            <version value="3.8.8"/>
+            <homePath value="$USER_HOME$/src/noop/jesetter/tests/python"/>
+            <type value="Python SDK"/>
+            <roots/>
+        </jdk>
+    </component>
+</application>
