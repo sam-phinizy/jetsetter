@@ -72,13 +72,6 @@ def get_installed_ides(config_path: pathlib.Path) -> list[str]:
 def guess_interpreter_path() -> Optional[pathlib.Path]:
     current_dir = pathlib.Path.cwd()
 
-    if in_venv():
-        if typer.confirm(
-            f"Running in a virtual environment. Use `{sys.executable}` as the interpreter?",
-            default=True,
-        ):
-            return pathlib.Path(sys.executable)
-
     if (current_dir / "venv").exists():
         venv_python = current_dir / "venv" / "bin" / "python"
         if typer.confirm(
@@ -133,6 +126,7 @@ def add(
     backup: bool = typer.Option(
         True, help="Create a backup of the config file before modifying"
     ),
+    confirm: bool = typer.Option(True, help="Confirm before modifying the config file"),
 ) -> None:
     interpreter_path = interpreter_path or guess_interpreter_path()
     if interpreter_path is None:
@@ -165,7 +159,7 @@ def add(
     )
 
     jdk_elements = dict(
-        name=name or f"({pathlib.Path().name}) - {python_version}",
+        name=name or f"({pathlib.Path().absolute().namee}) - {python_version}",
         version=python_version,
         homePath=final_path,
         type="Python SDK",
@@ -181,6 +175,12 @@ def add(
         if backup_path.exists():
             backup_path.unlink()
         shutil.copy(config_file_path, backup_path)
+
+    if confirm:
+        typer.confirm(
+            f"Are you sure you want to add {interpreter_path} to {ide_version} as {name or python_version}?",
+            abort=True,
+        )
 
     with pathlib.Path(config_file_path).open("w") as f:
         f.write(final_xml)
