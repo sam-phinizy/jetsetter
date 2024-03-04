@@ -1,3 +1,4 @@
+import functools
 import os
 import pathlib
 import platform
@@ -111,6 +112,7 @@ def get_python_version(interpreter_path: pathlib.Path) -> str:
 
 
 interpreter_app = typer.Typer()
+add_app = typer.Typer()
 
 
 @interpreter_app.command(help="Add a new python interpreter")
@@ -187,15 +189,21 @@ def add(
 
     typer.echo(f"Added {interpreter_path} to {ide_version} as {name or python_version}")
 
+@add_app.command("interpreter")
+@functools.wraps(add)
+def add_interpreter(*args, **kwargs):
+    return add(*args, **kwargs)
+
 
 def get_ide_version(config_directory: pathlib.Path) -> str:
     return questionary.select(
-        "Select IDE", choices=get_installed_ides(pathlib.Path(config_directory))
+        "Select IDE", choices= sorted(get_installed_ides(pathlib.Path(config_directory),reverse=True))
     ).ask()
 
 
 app = typer.Typer()
 app.add_typer(interpreter_app, name="interpreter", help="Manage python interpreters")
+app.add_typer(add_app, name="add", help="Add new interpreters to your IDE")
 
 if __name__ == "__main__":
     app()
