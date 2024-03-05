@@ -13,3 +13,6 @@ repos:
       - id: ruff
       # Run the formatter.
       - id: ruff-format
+default_stages:
+  - pre-push
+  - pre-commit
