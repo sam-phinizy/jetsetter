@@ -200,7 +200,7 @@ def get_ide_version(config_directory: pathlib.Path) -> str:
     return questionary.select(
         "Select IDE",
         choices=sorted(
-            get_installed_ides(pathlib.Path(config_directory), reverse=True)
+            get_installed_ides(pathlib.Path(config_directory)), reverse=True
         ),
     ).ask()
 

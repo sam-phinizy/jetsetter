@@ -10,6 +10,8 @@
 -e file:.
 argcomplete==3.2.2
     # via nox
+cfgv==3.4.0
+    # via pre-commit
 click==8.1.7
     # via typer
 colorlog==6.8.2
@@ -18,11 +20,14 @@ distlib==0.3.8
     # via virtualenv
 filelock==3.13.1
     # via virtualenv
+identify==2.5.35
+    # via pre-commit
 iniconfig==2.0.0
     # via pytest
 lxml==5.1.0
     # via xmldiff
 nodeenv==1.8.0
+    # via pre-commit
     # via pyright
 nox==2023.4.22
 packaging==23.2
@@ -32,10 +37,13 @@ platformdirs==4.2.0
     # via virtualenv
 pluggy==1.4.0
     # via pytest
+pre-commit==3.6.2
 prompt-toolkit==3.0.36
     # via questionary
 pyright==1.1.352
 pytest==8.0.2
+pyyaml==6.0.1
+    # via pre-commit
 questionary==2.0.1
     # via jetsetter
 ruff==0.2.2
@@ -48,6 +56,7 @@ typing-extensions==4.10.0
     # via typer
 virtualenv==20.25.1
     # via nox
+    # via pre-commit
 wcwidth==0.2.13
     # via prompt-toolkit
 xmldiff==2.6.3

@@ -38,6 +38,7 @@ def test_add_interpreter(set_up_jetbrains_config, monkeypatch):
             set_up_jetbrains_config,
             "--ide-version",
             "PyCharm2021.1",
+            "--no-confirm",
         ],
     )
     assert result.exit_code == 0
