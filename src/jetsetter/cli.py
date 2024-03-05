@@ -161,7 +161,7 @@ def add(
     )
 
     jdk_elements = dict(
-        name=name or f"({pathlib.Path().absolute().namee}) - {python_version}",
+        name=name or f"({pathlib.Path().absolute().name}) - {python_version}",
         version=python_version,
         homePath=final_path,
         type="Python SDK",
@@ -189,6 +189,7 @@ def add(
 
     typer.echo(f"Added {interpreter_path} to {ide_version} as {name or python_version}")
 
+
 @add_app.command("interpreter")
 @functools.wraps(add)
 def add_interpreter(*args, **kwargs):
@@ -197,7 +198,10 @@ def add_interpreter(*args, **kwargs):
 
 def get_ide_version(config_directory: pathlib.Path) -> str:
     return questionary.select(
-        "Select IDE", choices= sorted(get_installed_ides(pathlib.Path(config_directory),reverse=True))
+        "Select IDE",
+        choices=sorted(
+            get_installed_ides(pathlib.Path(config_directory), reverse=True)
+        ),
     ).ask()
 
 
