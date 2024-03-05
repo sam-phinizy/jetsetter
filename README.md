@@ -48,3 +48,9 @@ To run the tests, run the following command:
 ```bash
 nox
 ```
+
+Also you'll need to install the pre-commit hooks:
+
+```bash
+pre-commit install --hook-type pre-commit --hook-type pre-push
+```
